@@ -1,0 +1,23 @@
+<aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
+  <app-aside></app-aside>
+  </aside>
+  <div class="w-full flex flex-col h-screen overflow-y-hidden">
+     <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+      <app-header></app-header>
+     </header>
+     <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+      <app-header2></app-header2>
+     </header>
+     <!--Bloque Main -->
+       <div class="w-full overflow-x-hidden border-t flex flex-col">
+        <main class="w-full flex-grow p-6">
+         <router-outlet></router-outlet>
+         
+
+        </main>
+        
+        <footer class="w-full bg-white text-right p-4">
+        </footer>
+       </div>
+  </div>
+  

@@ -1,0 +1,13 @@
+<div class="mb-3 mt-3">
+  <label for="pwd" class="form-label">Password:</label>
+  <input type="text" [(ngModel)]=nombre class="form-control" placeholder="Introducir nombre">
+</div>
+<div class="form-check">
+    <button class="btn primary" (click)="alternarComponente()" >
+        {{esVisible?'Ocultar':'mostrar'}} componente
+    </button>
+</div>
+
+@if(esVisible){
+    <app-hijo [nombre]="nombre"></app-hijo>
+}

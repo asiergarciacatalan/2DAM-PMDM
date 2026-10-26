@@ -1,0 +1,30 @@
+<div class="mb-3 mt-3">
+  <label for="" class="form-label">Saldo Inicial:</label>
+  <input type="number" [(ngModel)]="saldoInicial" class="form-control" placeholder="Introducir saldo inicial">
+</div>
+
+<button type="button" (click)="crearCuenta()" class="btn btn-info">
+  Crear cuenta
+</button>
+
+<div class="mb-3 mt-3">
+  <label for="" class="form-label">Ingresar:</label>
+  <input type="number" [(ngModel)]="cantidadIngresar" class="form-control" placeholder="Introducir cantidad a ingresar">
+</div>
+
+<button type="button" (click)="ingresar()" class="btn btn-info">
+  Ingresar
+</button>
+
+<div class="mb-3 mt-3">
+  <label for="" class="form-label">Retirar:</label>
+  <input type="number" [(ngModel)]="cantidadRetirar" class="form-control" placeholder="Introducir cantidad a retirar">
+</div>
+
+<button type="button" (click)="retirar()" class="btn btn-info">
+  Retirar
+</button>
+
+<button type="button" (click)="pedirSaldo()" class="btn btn-info mt-3">
+  Obtener saldo
+</button>

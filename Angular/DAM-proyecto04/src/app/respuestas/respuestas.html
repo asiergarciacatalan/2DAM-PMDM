@@ -1,0 +1,71 @@
+<div id="accordion">
+
+  <div class="card mb-2">
+    <div class="card-header">
+      <a class="btn clearfix" data-bs-toggle="collapse" href="#collapse1">
+        Ejercicio 1
+      </a>
+      <span class="h6 float-end mt-2 text-info">{{respuesta1}}</span>
+    </div>
+    <div id="collapse1" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <app-ejercicio1 (respuesta1)="obtenerRespuesta1($event)" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-2">
+    <div class="card-header">
+      <a class="btn clearfix" data-bs-toggle="collapse" href="#collapse2">
+        Ejercicio 2
+      </a>
+      <span class="h6 float-end mt-2 text-info">{{respuesta2}}</span>
+    </div>
+    <div id="collapse2" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <app-ejercicio2 (respuesta2)="obtenerRespuesta2($event)" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-2">
+    <div class="card-header">
+      <a class="btn clearfix" data-bs-toggle="collapse" href="#collapse3">
+        Ejercicio 3
+      </a>
+      <span class="h6 float-end mt-2 text-info">{{respuesta3}}</span>
+    </div>
+    <div id="collapse3" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <app-ejercicio3 (respuesta3)="obtenerRespuesta3($event)" />
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-2">
+    <div class="card-header">
+      <a class="btn clearfix" data-bs-toggle="collapse" href="#collapse4">
+        Ejercicio 4
+      </a>
+      <span class="h6 float-end mt-2 text-info">{{respuesta4}}</span>
+    </div>
+    <div id="collapse4" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <app-ejercicio4 (respuesta4)="obtenerRespuesta4($event)" />
+      </div>
+    </div>
+  </div>
+
+    <div class="card mb-2">
+    <div class="card-header">
+      <a class="btn clearfix" data-bs-toggle="collapse" href="#collapse5">
+        Ejercicio 5
+      </a>
+      <span class="h6 float-end mt-2 text-info">{{respuesta5}}</span>
+    </div>
+    <div id="collapse5" class="collapse show" data-bs-parent="#accordion">
+      <div class="card-body">
+        <app-ejercicio5 (respuesta5)="obtenerRespuesta5($event)" />
+      </div>
+    </div>
+  </div>

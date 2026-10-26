@@ -1,0 +1,103 @@
+<section class="px-8 py-24">
+  <div class="container mx-auto">
+
+    <h2 class="text-4xl font-semibold text-center mb-8">Reservas de grupo</h2>
+
+    <!-- BLOQUE 1: registro -->
+    <div class="border rounded-xl p-6 mb-8">
+      <h3 class="text-xl font-semibold mb-4">1. Datos</h3>
+
+      <input [(ngModel)]="nombre" name="nombre" type="text" placeholder="Escribe tu nombre"
+        class="border rounded-lg px-3 py-2 mr-2" />
+
+      <select [(ngModel)]="tipocliente" name="tipocliente" class="border rounded-lg px-3 py-2 mr-2">
+        <option value="socio">Socio</option>
+        <option value="noSocio">No socio</option>
+        <option value="invitado">Invitado</option>
+      </select>
+
+      <select [(ngModel)]="tipocarta" (ngModelChange)="cambiarmenu()" name="tipocarta"
+        class="border rounded-lg px-3 py-2">
+        <option value="" disabled>Elige carta</option>
+        <option value="normal">Normal</option>
+        <option value="vegetariana">Vegetariana</option>
+        <option value="vegana">Vegana</option>
+      </select>
+    </div>
+
+    <div class="grid gap-8 md:grid-cols-2 mb-8">
+
+      <!-- BLOQUE 2: lo seleccionado -->
+      <div class="border rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4">2. Tu selección</h3>
+        <p>Cliente: {{ nombre }}</p>
+        <p>Tipo de cliente: {{ tipocliente }}</p>
+        <p>Carta: {{ tipocarta }}</p>
+        <p class="text-3xl font-semibold mt-4">Descuento: {{ descuento() }}%</p>
+      </div>
+
+      <!-- BLOQUE 3: platos de la carta -->
+      <div class="border rounded-xl p-6">
+        <h3 class="text-xl font-semibold mb-4">3. Carta {{ tipocarta }}</h3>
+
+        @if (tipocarta === '') {
+          <p class="text-gray-500">Elige una carta para ver los platos.</p>
+        } @else {
+          @for (plato of carta; track plato.nombre) {
+            <div class="flex justify-between items-center border-b py-2">
+              <div>
+                <p class="font-semibold">{{ plato.nombre }}</p>
+                <p class="text-sm text-gray-500">{{ plato.descripcion }}</p>
+              </div>
+              <div>
+                <span class="mr-2">{{ plato.precio }} €</span>
+                <button (click)="elegirPlato(plato)" class="border rounded-lg px-2 py-1">Elegir</button>
+              </div>
+            </div>
+          }
+        }
+
+        @if (platoNombre !== '') {
+          <p class="mt-4">Has elegido: <strong>{{ platoNombre }}</strong> ({{ platoPrecio }} €)</p>
+        }
+
+        <button (click)="anadirReserva()" [disabled]="nombre === '' || platoNombre === ''"
+          class="w-full mt-6 border border-green-500 text-green-500 rounded-lg py-2 disabled:opacity-50">
+          Añadir reserva
+        </button>
+      </div>
+    </div>
+
+    <!-- BLOQUE 4: tabla de reservas -->
+    <div class="border rounded-xl p-6">
+      <h3 class="text-xl font-semibold mb-4">4. Reservas</h3>
+
+      @if (reservas.length === 0) {
+        <p class="text-gray-500">Todavía no hay reservas.</p>
+      } @else {
+        <table class="w-full text-left">
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo cliente</th>
+            <th>Descuento</th>
+            <th>Carta</th>
+            <th>Plato</th>
+            <th>Precio final</th>
+          </tr>
+          @for (reserva of reservas; track $index) {
+            <tr>
+              <td>{{ reserva.nombre }}</td>
+              <td>{{ reserva.tipocliente }}</td>
+              <td>{{ reserva.descuento }}%</td>
+              <td>{{ reserva.tipocarta }}</td>
+              <td>{{ reserva.plato }}</td>
+              <td>{{ reserva.precio.toFixed(2) }} €</td>
+            </tr>
+          }
+        </table>
+      }
+    </div>
+
+  </div>
+</section>
+
