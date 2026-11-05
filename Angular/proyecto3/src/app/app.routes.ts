@@ -8,11 +8,20 @@ import { HttpClient } from './pages/http-client/http-client';
 import { Controlflow } from './pages/controlflow/controlflow';
 import { Ejercicio1 } from './pages/controlflow/ejercicio1/ejercicio1';
 import { Ejercicio2 } from './pages/controlflow/ejercicio2/ejercicio2';
+import { Ejercicio3 } from './pages/controlflow/ejercicio3/ejercicio3';
 import { Ejercicio1s } from './pages/signal/ejercicio1s/ejercicio1s';
 import { Ejercicio2s } from './pages/signal/ejercicio2s/ejercicio2s';
+import { Ejercicio3 as Ejercicio3s } from './pages/signal/ejercicio3/ejercicio3';
+import { Control1 } from './pages/Controles/control1/control1';
+import {Directiva1}from './pages/directiva/ejercicio1/directiva1';
 
 
 export const routes: Routes = [
+    {
+        path: '',
+        redirectTo: 'inicio',
+        pathMatch: 'full'
+    },
     {
         path: 'inicio',
         component: Inicio
@@ -26,6 +35,10 @@ export const routes: Routes = [
         component: Ejercicio2
     },
     {
+        path: 'ejercicio3',
+        component: Ejercicio3
+    },
+    {
         path: 'ejercicio1s',
         component: Ejercicio1s
     },
@@ -33,6 +46,18 @@ export const routes: Routes = [
         path: 'ejercicio2s',
         component: Ejercicio2s
     },
+    {
+        path: 'ejercicio3s',
+        component: Ejercicio3s
+    },
+    {
+        path: 'control1',
+        component: Control1
+    },
+    {
+        path: 'directiva1',
+        component: Directiva1
+    },  
     {
         path: 'directivas',
         component: Directivas

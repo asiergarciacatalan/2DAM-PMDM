@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AlumnosService } from '../../../service/alumnos-service';
 
 @Component({
   imports: [],
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './ejercicio2s.css',
   templateUrl: './ejercicio2s.html',
 })
-export class Ejercicio2s {}
+export class Ejercicio2s {
+  alumnoservice=inject(AlumnosService)
+  alumnos=this.alumnoservice.obtenerAlumnos()
+  constructor(){
+    console.log(this.alumnos)
+  }
+}

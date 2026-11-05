@@ -1,1 +1,17 @@
-<p>ejercicio2s works!</p>
+<section class="m-5 p-6 bg-white">
+  <h2 class="mb-2 text-3xl font-semibold text-gray-900">Our Executive Team</h2>
+  <p class="mb-12 text-lg font-medium text-gray-800">
+    Meet our talented team, a dynamic group of experts driven by passion and innovation.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-y-24 max-w-4xl">
+    @for (alumno of alumnos; track alumno.email) {
+    <div class="flex flex-col items-center text-center">
+      <img [src]="alumno.img" [alt]="alumno.nombre + ' ' + alumno.apellido" referrerpolicy="no-referrer"
+        class="w-[150px] h-[150px] rounded-2xl object-cover mb-6">
+      <h3 class="text-xl font-medium text-gray-900">{{ alumno.nombre }} {{ alumno.apellido }}</h3>
+      <p class="text-sm font-medium text-gray-800">{{ alumno.email }}</p>
+    </div>
+    }
+  </div>
+</section>

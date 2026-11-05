@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resumen examen Angular</title>
+<style>
+  :root { --rojo:#c3002f; --texto:#1f2328; --gris:#59636e; --fondo:#ffffff; --caja:#f6f8fa; --borde:#d1d9e0; --code:#0d1117; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--fondo); color:var(--texto); font:16px/1.6 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 16px 64px; }
+  h1 { font-size: 30px; margin: 0 0 4px; }
+  .sub { color: var(--gris); margin: 0 0 24px; }
+  h2 { font-size: 21px; margin: 36px 0 12px; padding-bottom: 6px; border-bottom: 3px solid var(--rojo); }
+  h2 span { display:inline-block; background:var(--rojo); color:#fff; border-radius:6px; padding:0 9px; margin-right:8px; font-size:17px; }
+  p, li { margin: 6px 0; }
+  ul, ol { padding-left: 22px; }
+  code { font-family: Consolas, "Cascadia Code", Menlo, monospace; font-size: 14px; background: var(--caja); border: 1px solid var(--borde); border-radius: 5px; padding: 1px 5px; }
+  pre { background: var(--code); color: #e6edf3; border-radius: 10px; padding: 14px 16px; overflow-x: auto; margin: 10px 0 14px; }
+  pre code { background: none; border: 0; padding: 0; color: inherit; font-size: 14px; line-height: 1.55; }
+  .file { display:inline-block; font-size:12px; font-weight:600; color:#fff; background:#444c56; border-radius:6px 6px 0 0; padding:2px 10px; margin-top:8px; }
+  .file + pre { margin-top:0; border-top-left-radius:0; }
+  .c { color:#8b949e; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0 14px; font-size: 15px; }
+  th, td { border: 1px solid var(--borde); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--caja); }
+  .oro { background:#fff4e5; border-left:5px solid #f0883e; border-radius:8px; padding:12px 16px; margin:12px 0; }
+  .ok { background:#e9f7ef; border-left:5px solid #2da44e; border-radius:8px; padding:12px 16px; margin:12px 0; }
+  .mal { background:#fdecee; border-left:5px solid var(--rojo); border-radius:8px; padding:12px 16px; margin:12px 0; }
+  .grid2 { display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  @media (max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+  @media print { pre { white-space: pre-wrap; } h2 { break-after: avoid; } pre, table { break-inside: avoid; } }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Resumen examen Angular</h1>
+<p class="sub">Lo imprescindible para sacar un 10. Léelo de arriba abajo antes de empezar.</p>
+
+<h2><span>1</span>La regla de oro</h2>
+<div class="oro">
+<ul>
+  <li><b>Datos y acciones</b> → <code>.ts</code> (variables, arrays, interfaces, métodos).</li>
+  <li><b>Lo que se ve</b> → <code>.html</code> (<code>{{ }}</code>, botones, <code>@if</code>, <code>@for</code>).</li>
+  <li>En el <code>.ts</code> siempre <b><code>this.</code></b> delante de las variables. En el <code>.html</code> <b>nunca</b>.</li>
+</ul>
+</div>
+
+<h2><span>2</span>Crear una página: 3 pasos</h2>
+<div class="file">Terminal</div>
+<pre><code>ng g c pages/reservas</code></pre>
+
+<div class="file">app.routes.ts</div>
+<pre><code>import { Reservas } from './pages/reservas/reservas';
+
+{ path: 'reservas', component: Reservas },</code></pre>
+
+<div class="file">aside.html</div>
+<pre><code>&lt;a routerLink="/reservas"&gt;Reservas&lt;/a&gt;</code></pre>
+<p>En <code>path</code> va <b>sin barra</b>; en <code>routerLink</code> va <b>con barra</b>.</p>
+
+<h2><span>3</span><code>imports</code> del componente</h2>
+<table>
+  <tr><th>Si en el .html usas…</th><th>Añade a <code>imports</code></th></tr>
+  <tr><td><code>[(ngModel)]</code></td><td><code>FormsModule</code></td></tr>
+  <tr><td>Un hijo <code>&lt;app-tarjeta&gt;</code></td><td><code>Tarjeta</code></td></tr>
+  <tr><td><code>@if</code>, <code>@for</code>, <code>@switch</code></td><td>Nada</td></tr>
+</table>
+
+<h2><span>4</span>Las 4 formas de conectar .ts y .html</h2>
+<table>
+  <tr><th>Se escribe</th><th>Para qué</th></tr>
+  <tr><td><code>{{ nombre }}</code></td><td>Mostrar un dato</td></tr>
+  <tr><td><code>[disabled]="nombre === ''"</code></td><td>Dar valor a un atributo</td></tr>
+  <tr><td><code>(click)="anadir()"</code></td><td>Reaccionar a un clic o evento</td></tr>
+  <tr><td><code>[(ngModel)]="nombre"</code></td><td>Inputs y selects</td></tr>
+</table>
+<p>Un select que cambia otra cosa lleva además <code>(ngModelChange)="cambiarmenu()"</code>.</p>
+
+<h2><span>5</span>Control flow</h2>
+<div class="file">.html</div>
+<pre><code>@if (lista.length === 0) {
+  &lt;p&gt;No hay nada&lt;/p&gt;
+} @else {
+  &lt;p&gt;Hay cosas&lt;/p&gt;
+}</code></pre>
+
+<div class="file">.html</div>
+<pre><code>@for (plato of carta; track plato.nombre) {
+  &lt;p&gt;{{ $index + 1 }}. {{ plato.nombre }}&lt;/p&gt;
+} @empty {
+  &lt;p&gt;Lista vacía&lt;/p&gt;
+}</code></pre>
+<ul>
+  <li><code>track</code> es obligatorio. Si no tienes un campo único: <code>track $index</code>.</li>
+  <li>Borrar: <code>(click)="borrar($index)"</code> y en el .ts <code>this.lista.splice(index, 1);</code></li>
+  <li>Tablas: fila de títulos <b>fuera</b> del <code>@for</code>, filas de datos <b>dentro</b>.</li>
+</ul>
+
+<h2><span>6</span>Signals</h2>
+<table>
+  <tr><th></th><th>Normal</th><th>Signal</th></tr>
+  <tr><td>Crear</td><td><code>n: number = 0;</code></td><td><code>n = signal(0);</code></td></tr>
+  <tr><td>Leer</td><td><code>this.n</code> / <code>{{ n }}</code></td><td><code>this.n()</code> / <code>{{ n() }}</code></td></tr>
+  <tr><td>Cambiar</td><td><code>this.n = 5;</code></td><td><code>this.n.set(5);</code></td></tr>
+  <tr><td>Según el anterior</td><td><code>this.n = this.n + 1;</code></td><td><code>this.n.update(v =&gt; v + 1);</code></td></tr>
+</table>
+
+<div class="file">.ts</div>
+<pre><code>import { Component, signal, computed } from '@angular/core';
+
+lista = signal&lt;Alumno[]&gt;([]);
+
+anadir(a: Alumno) {
+  this.lista.update(l =&gt; [...l, a]);
+}
+
+borrar(index: number) {
+  let copia = [...this.lista()];
+  copia.splice(index, 1);
+  this.lista.set(copia);
+}
+
+total = computed(() =&gt; {
+  let suma = 0;
+  for (let a of this.lista()) {
+    suma = suma + a.precio;
+  }
+  return suma;
+});</code></pre>
+<div class="mal">Con signals el <code>@for</code> lleva paréntesis: <code>@for (a of lista(); track $index)</code>. Nunca hagas <code>push</code> directamente al array del signal.</div>
+
+<h2><span>7</span>Padre e hijo</h2>
+<div class="grid2">
+  <div class="ok"><b>@Input</b>: el padre le pasa un dato al hijo.<br>En el padre: <b>corchetes</b> <code>[ ]</code></div>
+  <div class="ok"><b>@Output</b>: el hijo avisa al padre.<br>En el padre: <b>paréntesis</b> <code>( )</code></div>
+</div>
+
+<div class="file">HIJO .ts</div>
+<pre><code>import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+@Input() alumno!: Alumno;
+@Output() borrar = new EventEmitter&lt;string&gt;();
+
+pulsarBorrar() {
+  this.borrar.emit(this.alumno.email);
+}</code></pre>
+
+<div class="file">PADRE .html</div>
+<pre><code>&lt;app-tarjeta [alumno]="a" (borrar)="borrarAlumno($event)"&gt;&lt;/app-tarjeta&gt;</code></pre>
+
+<div class="file">PADRE .ts</div>
+<pre><code>imports: [Tarjeta],
+
+borrarAlumno(email: string) {
+  <span class="c">// $event llega aquí como "email"</span>
+}</code></pre>
+
+<h2><span>8</span>Modal</h2>
+<div class="file">.ts</div>
+<pre><code>isModalOpen: boolean = false;
+seleccionado?: Alumno;
+
+openModal(a: Alumno) {
+  this.seleccionado = a;
+  this.isModalOpen = true;
+}
+
+closeModal() {
+  this.isModalOpen = false;
+}</code></pre>
+
+<div class="file">.html</div>
+<pre><code>@if (isModalOpen) {
+  &lt;div (click)="closeModal()" class="fixed inset-0 grid place-items-center bg-black bg-opacity-60"&gt;
+    &lt;div (click)="$event.stopPropagation()" class="bg-white p-4 rounded-lg"&gt;
+      {{ seleccionado?.nombre }}
+      &lt;button (click)="closeModal()"&gt;Cerrar&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+}</code></pre>
+
+<h2><span>9</span>Descuento</h2>
+<div class="file">.ts</div>
+<pre><code>descuento(): number {
+  if (this.tipocliente === 'socio') {
+    return 40;
+  } else if (this.tipocliente === 'noSocio') {
+    return 20;
+  } else {
+    return 0;
+  }
+}
+
+let precioFinal = this.precio - (this.precio * this.descuento()) / 100;</code></pre>
+
+<h2><span>10</span>Ciclo de vida</h2>
+<p><b>constructor → ngOnChanges → ngOnInit → ngAfterViewInit → ngOnDestroy</b></p>
+<ul>
+  <li><code>ngOnInit</code>: lo que se hace al empezar (cargar datos, arrancar un temporizador).</li>
+  <li><code>ngOnDestroy</code>: limpiar al salir (<code>clearInterval</code>).</li>
+</ul>
+
+<h2><span>★</span>Cómo hacer el examen</h2>
+<ol>
+  <li><b>5 minutos en papel:</b> qué páginas, componentes, interfaces y variables vas a necesitar.</li>
+  <li><b>Primero el esqueleto:</b> rutas y menú funcionando, aunque las páginas estén vacías.</li>
+  <li><b>Copia de tus ejercicios con el índice</b> y cambia <b>todos</b> los nombres.</li>
+  <li><b>Terminal y consola (F12) siempre a la vista.</b> Un error rojo se arregla en el momento.</li>
+  <li><b>Últimos 10 minutos:</b> prueba todos los botones, comprueba el <code>@empty</code>, borra <code>console.log</code> e imports que no uses.</li>
+</ol>
+
+<div class="mal">
+<b>Si algo falla, casi siempre es una de estas cinco cosas:</b>
+<ul>
+  <li>Falta un <code>this.</code></li>
+  <li>Falta algo en <code>imports</code></li>
+  <li>Lees un signal sin <code>()</code></li>
+  <li>La ruta no está en <code>app.routes.ts</code></li>
+  <li>Copiaste un bloque y no le cambiaste los nombres</li>
+</ul>
+</div>
+
+<p style="text-align:center;margin-top:32px;font-size:18px"><b>Mucha suerte. Vas preparado.</b></p>
+
+</main>
+</body>
+</html>

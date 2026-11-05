@@ -1,13 +1,11 @@
 import { Component, ElementRef, HostListener, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Aside } from './aside/aside';
-import { AsideM } from './aside-m/aside-m';
 import { Body } from './body/body';
 import { Header } from './header/header';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Aside, AsideM, Body, Header],
+  imports: [Aside, Body, Header],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

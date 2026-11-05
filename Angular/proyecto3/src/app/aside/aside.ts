@@ -17,6 +17,8 @@ export class Aside {
   isPagesMenuOpen1 = false;
   isPagesMenuOpen2 = false;
   isPagesMenuOpen3 = false;
+  isPagesMenuOpen4 = false;
+  isPagesMenuOpen5 = false;
 
 
   closeSideMenu() {
@@ -43,5 +45,11 @@ export class Aside {
   togglePagesMenu3() {
     this.isPagesMenuOpen3 = !this.isPagesMenuOpen3;
   }
+   togglePagesMenu4() {
+    this.isPagesMenuOpen4 = !this.isPagesMenuOpen4;
+  }
 
+ togglePagesMenu5() {
+    this.isPagesMenuOpen5 = !this.isPagesMenuOpen5;
+  }
 }
